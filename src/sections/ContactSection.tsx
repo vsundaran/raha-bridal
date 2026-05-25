@@ -218,7 +218,7 @@ export default function ContactSection() {
                   <div className="relative raha-datepicker-wrapper">
                     <DatePicker
                       selected={weddingDate}
-                      onChange={(date) => setWeddingDate(date)}
+                      onChange={(date: Date | null) => setWeddingDate(date)}
                       minDate={new Date()}
                       placeholderText="Select your wedding date"
                       dateFormat="dd MMM yyyy"

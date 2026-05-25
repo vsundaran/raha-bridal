@@ -4,7 +4,7 @@ import { Expand, Heart, Images } from 'lucide-react'
 import PortfolioModal from '../components/PortfolioModal'
 import {
   modelPhotos, hairstylePhotos, mehndiPhotos,
-  sareePhotos, skincarePhotos, haircarePhotos
+  skincarePhotos, haircarePhotos
 } from '../constants/images'
 
 const categories = [
