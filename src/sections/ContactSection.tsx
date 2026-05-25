@@ -1,6 +1,9 @@
 import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Phone, MapPin, MessageCircle, Send, Loader2 } from 'lucide-react'
+import { Phone, MapPin, MessageCircle, Send, Loader2, CalendarDays } from 'lucide-react'
+import DatePicker from 'react-datepicker'
+import { format } from 'date-fns'
+import 'react-datepicker/dist/react-datepicker.css'
 import InstagramIcon from '../components/InstagramIcon'
 
 const services = [
@@ -18,7 +21,6 @@ const services = [
 interface FormData {
   brideName: string
   phone: string
-  weddingDate: string
   location: string
   service: string
   message: string
@@ -28,8 +30,9 @@ export default function ContactSection() {
   const ref = useRef<HTMLElement>(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const [form, setForm] = useState<FormData>({
-    brideName: '', phone: '', weddingDate: '', location: '', service: '', message: '',
+    brideName: '', phone: '', location: '', service: '', message: '',
   })
+  const [weddingDate, setWeddingDate] = useState<Date | null>(null)
   const [sending, setSending] = useState(false)
 
   const update = (k: keyof FormData) => (
@@ -39,19 +42,28 @@ export default function ContactSection() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setSending(true)
-    const text = encodeURIComponent(
-      `Hi, I'm ${form.brideName || 'interested in booking'}!\n\n` +
-      `📞 Phone: ${form.phone}\n` +
-      `💍 Wedding Date: ${form.weddingDate || 'TBD'}\n` +
-      `📍 Location: ${form.location || 'TBD'}\n` +
-      `✨ Service: ${form.service || 'To discuss'}\n\n` +
-      `Message: ${form.message || '—'}`
-    )
+    const dateStr = weddingDate ? format(weddingDate, 'dd MMM yyyy') : 'To be confirmed'
+    const lines = [
+      `Hi! I am ${form.brideName || 'interested in booking a consultation'}.`,
+      '',
+      `Name         : ${form.brideName || '-'}`,
+      `Phone        : ${form.phone}`,
+      `Wedding Date : ${dateStr}`,
+      `Location     : ${form.location || '-'}`,
+      `Service      : ${form.service || '-'}`,
+      '',
+      form.message ? `Message: ${form.message}` : '',
+    ].filter((l, i, arr) => !(l === '' && arr[i - 1] === ''))
+
+    const text = encodeURIComponent(lines.join('\n').trim())
     setTimeout(() => {
       window.open(`https://wa.me/917598052653?text=${text}`, '_blank')
       setSending(false)
     }, 600)
   }
+
+  const fieldClass =
+    'w-full bg-[#FAF6F1] border border-[#E8D5B0] rounded-sm px-4 py-3 font-sans text-[14px] text-[#2C1810] placeholder-[#C4B0A8] focus:border-[#C9A96E] focus:bg-white transition-all duration-200'
 
   return (
     <section id="contact" ref={ref} className="py-24 lg:py-36 bg-[#FDFAF6]">
@@ -88,10 +100,7 @@ export default function ContactSection() {
             transition={{ duration: 0.8 }}
           >
             <div className="space-y-7 mb-10">
-              <a
-                href="tel:+917598052653"
-                className="flex items-start gap-4 group"
-              >
+              <a href="tel:+917598052653" className="flex items-start gap-4 group">
                 <div className="w-10 h-10 rounded-sm bg-[#F5EFE6] flex items-center justify-center flex-shrink-0 group-hover:bg-[#C9A96E] transition-colors duration-300">
                   <Phone size={16} className="text-[#C9A96E] group-hover:text-white transition-colors" />
                 </div>
@@ -182,7 +191,7 @@ export default function ContactSection() {
                     value={form.brideName}
                     onChange={update('brideName')}
                     placeholder="Your beautiful name"
-                    className="w-full bg-[#FAF6F1] border border-[#E8D5B0] rounded-sm px-4 py-3 font-sans text-[14px] text-[#2C1810] placeholder-[#C4B0A8] focus:border-[#C9A96E] focus:bg-white transition-all duration-200"
+                    className={fieldClass}
                   />
                 </div>
                 <div>
@@ -195,23 +204,37 @@ export default function ContactSection() {
                     onChange={update('phone')}
                     placeholder="+91 XXXXX XXXXX"
                     required
-                    className="w-full bg-[#FAF6F1] border border-[#E8D5B0] rounded-sm px-4 py-3 font-sans text-[14px] text-[#2C1810] placeholder-[#C4B0A8] focus:border-[#C9A96E] focus:bg-white transition-all duration-200"
+                    className={fieldClass}
                   />
                 </div>
               </div>
 
               <div className="grid sm:grid-cols-2 gap-5">
+                {/* Luxury date picker */}
                 <div>
                   <label className="block font-sans text-[11px] tracking-[0.15em] uppercase text-[#9E8E86] mb-2">
                     Wedding Date
                   </label>
-                  <input
-                    type="date"
-                    value={form.weddingDate}
-                    onChange={update('weddingDate')}
-                    className="w-full bg-[#FAF6F1] border border-[#E8D5B0] rounded-sm px-4 py-3 font-sans text-[14px] text-[#2C1810] focus:border-[#C9A96E] focus:bg-white transition-all duration-200"
-                  />
+                  <div className="relative raha-datepicker-wrapper">
+                    <DatePicker
+                      selected={weddingDate}
+                      onChange={(date) => setWeddingDate(date)}
+                      minDate={new Date()}
+                      placeholderText="Select your wedding date"
+                      dateFormat="dd MMM yyyy"
+                      showMonthDropdown
+                      showYearDropdown
+                      dropdownMode="select"
+                      popperClassName="raha-datepicker-popper"
+                      popperPlacement="bottom-start"
+                    />
+                    <CalendarDays
+                      size={15}
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#C9A96E] pointer-events-none"
+                    />
+                  </div>
                 </div>
+
                 <div>
                   <label className="block font-sans text-[11px] tracking-[0.15em] uppercase text-[#9E8E86] mb-2">
                     Wedding Location
@@ -221,7 +244,7 @@ export default function ContactSection() {
                     value={form.location}
                     onChange={update('location')}
                     placeholder="City, Venue"
-                    className="w-full bg-[#FAF6F1] border border-[#E8D5B0] rounded-sm px-4 py-3 font-sans text-[14px] text-[#2C1810] placeholder-[#C4B0A8] focus:border-[#C9A96E] focus:bg-white transition-all duration-200"
+                    className={fieldClass}
                   />
                 </div>
               </div>
@@ -233,7 +256,7 @@ export default function ContactSection() {
                 <select
                   value={form.service}
                   onChange={update('service')}
-                  className="w-full bg-[#FAF6F1] border border-[#E8D5B0] rounded-sm px-4 py-3 font-sans text-[14px] text-[#2C1810] focus:border-[#C9A96E] focus:bg-white transition-all duration-200 cursor-pointer"
+                  className={`${fieldClass} cursor-pointer`}
                 >
                   <option value="">Select a service...</option>
                   {services.map((s) => (
@@ -251,7 +274,7 @@ export default function ContactSection() {
                   onChange={update('message')}
                   placeholder="Tell us about your vision, any special requests, or questions..."
                   rows={4}
-                  className="w-full bg-[#FAF6F1] border border-[#E8D5B0] rounded-sm px-4 py-3 font-sans text-[14px] text-[#2C1810] placeholder-[#C4B0A8] focus:border-[#C9A96E] focus:bg-white transition-all duration-200 resize-none"
+                  className={`${fieldClass} resize-none`}
                 />
               </div>
 
