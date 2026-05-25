@@ -39,7 +39,8 @@ export default function HeroSection() {
             <img
               src={heroImages[current]}
               alt="Bridal portrait"
-              className="w-full h-full object-cover object-top"
+              className="w-full h-full"
+              style={{ objectFit: 'cover', objectPosition: 'center 20%' }}
               loading="eager"
             />
           ) : (

@@ -125,12 +125,13 @@ export default function ServicesSection() {
               className="group luxury-card cursor-default"
             >
               {/* Image */}
-              <div className="relative h-56 overflow-hidden bg-[#F5EFE6]">
+              <div className="relative aspect-[3/4] sm:aspect-auto sm:h-64 lg:h-56 overflow-hidden bg-[#F5EFE6]">
                 {s.image ? (
                   <img
                     src={s.image}
                     alt={s.title}
-                    className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full transition-transform duration-700 group-hover:scale-105"
+                    style={{ objectFit: 'cover', objectPosition: 'center 20%' }}
                     loading="lazy"
                   />
                 ) : (
