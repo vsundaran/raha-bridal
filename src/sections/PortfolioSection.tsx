@@ -178,7 +178,8 @@ export default function PortfolioSection() {
             rel="noopener noreferrer"
             className="btn-outline-dark"
           >
-            Follow @raha_bridalstudio_beautylounge
+            <span className="sm:hidden">Follow on Instagram</span>
+            <span className="hidden sm:inline">Follow @raha_bridalstudio_beautylounge</span>
           </a>
         </motion.div>
       </div>

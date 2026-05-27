@@ -136,7 +136,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <div className="font-sans text-[11px] tracking-[0.15em] uppercase text-[#9E8E86] mb-0.5">Instagram</div>
-                  <div className="font-sans text-[15px] text-[#2C1810] group-hover:text-[#C9A96E] transition-colors">@raha_bridalstudio_beautylounge</div>
+                  <div className="font-sans text-[15px] text-[#2C1810] group-hover:text-[#C9A96E] transition-colors break-all">@raha_bridalstudio_beautylounge</div>
                 </div>
               </a>
 

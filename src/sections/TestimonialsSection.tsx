@@ -221,29 +221,27 @@ export default function TestimonialsSection() {
 
         {/* ── Mobile: 1 card at a time ───────────────────────────── */}
         <div className="lg:hidden">
-          <div style={{ minHeight: '340px' }} className="relative">
-            <AnimatePresence mode="wait" custom={direction}>
-              <motion.div
-                key={`mobile-${mobileIndex}`}
-                custom={direction}
-                variants={variants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ duration: 0.35, ease: 'easeInOut' }}
-                className="absolute inset-0 bg-[rgba(255,255,255,0.04)] border border-[rgba(201,169,110,0.15)] rounded-sm p-7 flex flex-col"
-              >
-                <Quote size={24} className="text-[#C9A96E]/40 mb-5 flex-shrink-0" />
-                <p className="font-serif text-[16px] text-[rgba(253,250,246,0.85)] leading-[1.75] font-light italic flex-1 mb-6">
-                  "{testimonials[mobileIndex].text}"
-                </p>
-                <div className="mt-auto">
-                  <StarRow rating={testimonials[mobileIndex].rating} />
-                  <Avatar initial={testimonials[mobileIndex].initial} name={testimonials[mobileIndex].name} service={testimonials[mobileIndex].service} />
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+          <AnimatePresence mode="wait" custom={direction}>
+            <motion.div
+              key={`mobile-${mobileIndex}`}
+              custom={direction}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.35, ease: 'easeInOut' }}
+              className="bg-[rgba(255,255,255,0.04)] border border-[rgba(201,169,110,0.15)] rounded-sm p-7 flex flex-col"
+            >
+              <Quote size={24} className="text-[#C9A96E]/40 mb-5 flex-shrink-0" />
+              <p className="font-serif text-[16px] text-[rgba(253,250,246,0.85)] leading-[1.75] font-light italic flex-1 mb-6">
+                "{testimonials[mobileIndex].text}"
+              </p>
+              <div className="mt-auto pt-2">
+                <StarRow rating={testimonials[mobileIndex].rating} />
+                <Avatar initial={testimonials[mobileIndex].initial} name={testimonials[mobileIndex].name} service={testimonials[mobileIndex].service} />
+              </div>
+            </motion.div>
+          </AnimatePresence>
 
           {/* Mobile controls — individual dots */}
           <div className="flex items-center justify-center gap-6 mt-6">

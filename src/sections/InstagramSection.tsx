@@ -36,15 +36,17 @@ export default function InstagramSection() {
               <em className="text-[#C9A96E]">Our World</em>
             </h2>
           </div>
-          <a
-            href="https://www.instagram.com/raha_bridalstudio_beautylounge"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-outline-dark flex-shrink-0"
-          >
-            <ExternalLink size={13} />
-            @raha_bridalstudio_beautylounge
-          </a>
+          <div className="hidden sm:block flex-shrink-0">
+            <a
+              href="https://www.instagram.com/raha_bridalstudio_beautylounge"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-outline-dark"
+            >
+              <ExternalLink size={13} />
+              @raha_bridalstudio_beautylounge
+            </a>
+          </div>
         </motion.div>
 
         {/* Feed grid */}
