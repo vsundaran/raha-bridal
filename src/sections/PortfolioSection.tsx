@@ -28,7 +28,7 @@ function buildGallery(): GalleryItem[] {
   const take = (arr: string[], n: number) => arr.slice(0, n).filter(Boolean)
   const bridal = take(modelPhotos, 8)
   const hairstyle = take(hairstylePhotos, 8)
-  const mehndi = take(mehndiPhotos, 8)
+  const mehndi = take(mehndiPhotos, 20)
   // HEIC files (sareePhotos) don't render cross-browser; use model photos for this category
   const saree = take(modelPhotos, 14).slice(8, 14)
   const skincare = take(skincarePhotos, 5)
@@ -138,7 +138,15 @@ export default function PortfolioSection() {
               >
                 <img
                   src={item.src}
-                  alt={`${item.category} portfolio`}
+                  alt={
+                    item.category === 'bridal' ? 'Bridal makeup by Raha Bridal Studio Trichy Tamil Nadu' :
+                    item.category === 'hairstyle' ? 'Bridal hairstyle by Raha Bridal Studio Trichy' :
+                    item.category === 'mehndi' ? 'Bridal mehndi design by Raha Bridal Studio Trichy' :
+                    item.category === 'saree' ? 'Saree draping by Raha Bridal Studio Trichy Tamil Nadu' :
+                    item.category === 'skincare' ? 'Pre-bridal skin care by Raha Bridal Studio Trichy' :
+                    item.category === 'haircare' ? 'Bridal hair care treatment by Raha Bridal Studio Trichy' :
+                    'Bridal beauty by Raha Bridal Studio Trichy Tamil Nadu'
+                  }
                   className="w-full object-cover transition-transform duration-700 group-hover:scale-105 block"
                   loading="lazy"
                 />

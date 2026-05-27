@@ -129,7 +129,7 @@ export default function ServicesSection() {
                 {s.image ? (
                   <img
                     src={s.image}
-                    alt={s.title}
+                    alt={`${s.title} by Raha Bridal Studio, Trichy`}
                     className="w-full h-full transition-transform duration-700 group-hover:scale-105"
                     style={{ objectFit: 'cover', objectPosition: 'center 20%' }}
                     loading="lazy"

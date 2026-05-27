@@ -38,7 +38,7 @@ export default function HeroSection() {
           {heroImages[current] ? (
             <img
               src={heroImages[current]}
-              alt="Bridal portrait"
+              alt="Luxury bridal makeup by Raha Bridal Studio, Trichy Tamil Nadu"
               className="w-full h-full"
               style={{ objectFit: 'cover', objectPosition: 'center 20%' }}
               loading="eager"

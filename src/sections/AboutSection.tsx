@@ -4,8 +4,9 @@ import { Sparkles, MapPin, MessageCircle } from 'lucide-react'
 import { ranjaniPhotos, modelPhotos } from '../constants/images'
 
 const highlights = [
-  { number: '500+', label: 'Brides Adorned' },
-  { number: '8+', label: 'Years of Artistry' },
+  { number: '200+', label: 'Brides Styled' },
+  { number: '5+', label: 'Years of Artistry' },
+  { number: '300+', label: 'Saree Pre-Pleating & Draping' },
   { number: 'Tamil Nadu', label: 'Wide Coverage' },
 ]
 
@@ -119,7 +120,7 @@ export default function AboutSection() {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-6 mb-10 py-8 border-y border-[#E8D5B0]/60">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mb-10 py-8 border-y border-[#E8D5B0]/60">
               {highlights.map(({ number, label }) => (
                 <div key={label}>
                   <div className="font-serif text-[28px] text-[#C9A96E] font-medium mb-1">
